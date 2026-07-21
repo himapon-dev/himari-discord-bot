@@ -24,13 +24,23 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    print(
+        "RECEIVED:",
+        repr(message.content),
+        "| CHANNEL:",
+        getattr(message.channel, "name", None),
+        "| AUTHOR:",
+        message.author
+    )
 
     if message.author == client.user:
        return
     
     if message.channel.name != "talk-to-himari":
-       return
+        print("SKIPPED: different channel")
+        return
     
+    print("SENDING REPLY")
     await message.channel.send(random.choice(REPLIES))
 
 client.run(TOKEN)
