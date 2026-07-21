@@ -36,7 +36,7 @@ async def on_message(message):
     if message.author == client.user:
        return
     
-    if message.channel.name != "talk-to-himari":
+    if message.channel.name != "talk-to-himari🐶":
         print("SKIPPED: different channel")
         return
     
