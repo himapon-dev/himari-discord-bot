@@ -9,6 +9,8 @@ load_dotenv()
 
 TOKEN = os.getenv("HIMARI_TOKEN")
 
+HIMARI_CHANNEL_ID = 1504418183333941390
+
 with open("reply_list_himari.json", encoding="utf-8") as f:
     REPLIES = json.load(f)
 
@@ -24,23 +26,29 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if message.author == client.user:
+        return
+    
+    if message.channel.id != HIMARI_CHANNEL_ID:
+        print(
+            "SKIPPED:",
+            repr(message.content),
+            "| CHANNEL:",
+            getattr(message.channel, "name", None),
+            "| CHANNEL ID:",
+            message.channel.id
+        )
+        return
+
     print(
         "RECEIVED:",
         repr(message.content),
         "| CHANNEL:",
         getattr(message.channel, "name", None),
-        "| AUTHOR:",
-        message.author
+        "| CHANNEL ID:",
+        message.channel.id
     )
 
-    if message.author == client.user:
-       return
-    
-    if message.channel.name != "talk-to-himari🐶":
-        print("SKIPPED: different channel")
-        return
-    
-    print("SENDING REPLY")
     await message.channel.send(random.choice(REPLIES))
 
 client.run(TOKEN)
