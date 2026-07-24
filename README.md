@@ -4,7 +4,7 @@ The Japanese version of Himari Room, a Discord companion designed to offer gentl
 
 ## Features
 
-- English conversation on Discord
+- Japanese conversation on Discord
 - Friendly responses
 - JSON-based reply management
 - Cloud-hosted on Railway
